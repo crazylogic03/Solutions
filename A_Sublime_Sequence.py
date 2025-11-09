@@ -8,3 +8,4 @@ for _ in range(t):
         else:
             arr.append(-x)
     print(sum(arr))
+    
