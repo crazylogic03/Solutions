@@ -6,3 +6,5 @@ if tar in arr:
 else:
     ind = -1
 print(ind)
+
+
