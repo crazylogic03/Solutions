@@ -10,3 +10,6 @@ while True:
         numbers.append(str(i))
         total += i
     print(" ".join(numbers) + f" sum ={total}")
+
+
+    
