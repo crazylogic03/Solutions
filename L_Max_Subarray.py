@@ -10,3 +10,4 @@ for _ in range(t):
             ans.append(current_max)
 
     print(*ans)
+
