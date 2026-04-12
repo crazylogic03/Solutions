@@ -3,3 +3,6 @@ def print_numbers(n):
 
 n = int(input())
 print_numbers(n)
+
+
+
