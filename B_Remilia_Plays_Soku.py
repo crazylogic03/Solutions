@@ -1,13 +1,14 @@
-t=int(input())
+t = int(input())
+
 for _ in range(t):
-    n,x1,x2,k=map(int,input().split())
-    m1= (x2 - x1 + n) % n
-    m2= (x1 - x2 + n) % n
-    
+    n, x1, x2, k = map(int, input().split())
 
-    ans = min(m1,m2)+k
-    print(ans)
-    # d1 = (x2 - x1 + n) % n
-    # d2 = (x1 - x2 + n) % n
+    d1 = (x2 - x1 + n) % n
+    d2 = (x1 - x2 + n) % n
 
-    # print(min(d1, d2) + k)
+    d = min(d1, d2)
+
+    if n % 2 == 0 and d == n // 2:
+        print(max(d - 1, k + 1))
+    else:
+        print(max(d, k + 1))
