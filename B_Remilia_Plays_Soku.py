@@ -1,14 +1,9 @@
 t = int(input())
-
 for _ in range(t):
     n, x1, x2, k = map(int, input().split())
-
-    d1 = (x2 - x1 + n) % n
-    d2 = (x1 - x2 + n) % n
-
-    d = min(d1, d2)
-
-    if n % 2 == 0 and d == n // 2:
-        print(max(d - 1, k + 1))
+    dist = abs(x1 - x2)
+    min_dist = min(dist, n - dist)
+    if n <= 3:
+        print(min_dist)
     else:
-        print(max(d, k + 1))
+        print(min_dist + k)

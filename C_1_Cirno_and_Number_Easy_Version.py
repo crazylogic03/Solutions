@@ -1,41 +1,41 @@
 t = int(input())
-
 for _ in range(t):
-    a, n = map(int, input().split())
-    digits = sorted(map(str, input().split()))
-
-    s = str(a)
-    L = len(s)
-
-    ans = [float('inf')]
-    def dfs(pos, length, tight, started, cur):
-
-        if started:
-            val = int(cur)
-            ans[0] = min(ans[0], abs(a - val))
-
-        if pos == length:
-            return
-        limit = s[pos] if tight and pos < L else '9'
-
-        for d in digits:
-
-            if tight and d > limit:
-                break
-            if not started and length > 1 and d == '0':
-                continue
-
-            ntight = tight and (d == limit)
-
-            dfs(
-                pos + 1,
-                length,
-                ntight,
-                True,
-                cur + d
-            )
-    for length in [L - 1, L, L + 1]:
-        if length > 0:
-            dfs(0, length, length == L, False, "")
-
-    print(ans[0])
+    a_str, n_str = input().split()
+    n = int(n_str)
+    d1, d2 = map(int, input().split())
+    
+    a = int(a_str)
+    L = len(a_str)
+    
+    candidates = set()
+    candidates.add(d1)
+    candidates.add(d2)
+    if L > 1:
+        if d2 > 0:
+            candidates.add(int(str(d2) * (L - 1)))
+    if d1 > 0:
+        candidates.add(int(str(d1) * (L + 1)))
+    else:
+        candidates.add(int(str(d2) + str(d1) * L))
+    for i in range(L):
+        prefix = a_str[:i]
+        
+        for x in (d1, d2):
+            if i == 0 and x == 0 and L > 1:
+                continue 
+            
+            val_x = x
+            val_a = int(a_str[i])
+            
+            if val_x < val_a:
+                cand_str = prefix + str(x) + str(d2) * (L - 1 - i)
+                candidates.add(int(cand_str))
+            elif val_x > val_a:
+                cand_str = prefix + str(x) + str(d1) * (L - 1 - i)
+                candidates.add(int(cand_str))
+        if int(a_str[i]) not in (d1, d2):
+            break
+    else:
+        candidates.add(a)
+    min_diff = min(abs(a - c) for c in candidates)
+    print(min_diff)
